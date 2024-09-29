@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+
+  environment {
+    PATH = "/usr/bin/mvn:$PATH"
+  }
+
+  stages {
+    stage('Git Check') {
+      steps {
+        git branch: 'main', url: 'https://github.com/Nonsocha/Declearative-pipeline'
+      }
+    }
+
+    stage('Maven Build') {
+      steps {
+        sh 'mvn clean package'
+      }
+    }
+  }
+}
